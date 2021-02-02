@@ -19,8 +19,6 @@ int main(){
     int tmp = 0;
     //inizializzo anche due vettori temporanei per salvare coppie di numeri pari e dispari
     int odd[2] = {-1, -1}, even[2] = {-1, -1};
-    //infine inizializzo una somma temporanea dove verrà memorizzato il risultato prima di eseguire i controlli
-    int tmp_sum = 0;
 
     //per ogni numero che devo analizzare
     for(int i = 0; i < N; i++){
@@ -28,11 +26,35 @@ int main(){
         in >> tmp;
         //verifico che il resto per la divisione per 2 sia 0 (cioe' se e' pari)
         if(tmp % 2 == 0){
-            //salvo in max_sum il massimo tra max_sum e tmp_sum
-            max_sum = max(max_sum, tmp_sum);
+            //verifico se uno dei due elementi della coppia è minore del numero che ho letto in input
+            if(even[0] < tmp || even[1] < tmp){
+                //assegno il maggiore dei due in posizione 0
+                even[0] = max(even[0], even[1]);
+                //e sostituisco l'altro con tmp
+                even[1] = tmp;
+            }
         } else {
-            //altrimenti il numero che sto analizzando e' dispari
+            //nel caso in cui invece il numero considerato e' dispari
+
+            //verifico se uno dei due elementi della coppia è minore del numero che ho letto in input
+            if(odd[0] < tmp || odd[1] < tmp){
+                //assegno il maggiore dei due in posizione 0
+                odd[0] = max(odd[0], odd[1]);
+                //e sostituisco l'altro con tmp
+                odd[1] = tmp;
+            }
         }
+    }
+
+    //verifico che esista una coppia di numeri pari
+    if(even[0] != -1 && even[1] != -1){
+        //e scelgo il maggiore tra max_sum e la somma della coppia
+        max_sum = max(max_sum, even[0] + even[1]);
+    }
+
+    //faccio lo stesso per i numeri dispari
+    if(odd[0] != -1 && odd[1] != -1){
+        max_sum = max(max_sum, odd[0] + odd[1]);
     }
 
     //stampo il risultato sul file di output
