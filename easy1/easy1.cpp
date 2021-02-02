@@ -34,4 +34,6 @@ int main(){
 
     //stampo il risultato sul file di output
     out << max_number;
+
+    return 0;
 }

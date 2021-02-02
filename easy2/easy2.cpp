@@ -35,4 +35,6 @@ int main(){
 
     //stampo il risultato sul file di output
     out << max_sum;
+
+    return 0;
 }
